@@ -1,0 +1,196 @@
+{
+  "version": "phase1",
+  "collection": "kb_docs",
+  "tests": [
+    {
+      "id": "q001",
+      "question": "What is the main goal?",
+      "expected_any": ["main goal", "answer", "documents"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q002",
+      "question": "Summarize the purpose in one sentence.",
+      "expected_any": ["purpose", "document", "answer"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q003",
+      "question": "What should the system answer from?",
+      "expected_any": ["document", "documents"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q004",
+      "question": "Is this a RAG test document?",
+      "expected_any": ["rag", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q005",
+      "question": "Give the key point only.",
+      "expected_any": ["answer", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q006",
+      "question": "What is written about the main goal?",
+      "expected_any": ["main goal", "answer", "documents"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q007",
+      "question": "State the objective of test.txt.",
+      "expected_any": ["objective", "goal", "answer"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q008",
+      "question": "What does the sample file say?",
+      "expected_any": ["rag", "test", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q009",
+      "question": "In plain words, what is the target behavior?",
+      "expected_any": ["answer", "from documents", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q010",
+      "question": "What is the goal according to the indexed text?",
+      "expected_any": ["goal", "answer", "documents"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q011",
+      "question": "Гол зорилго юу вэ?",
+      "expected_any": ["гол зорилго", "баримт", "хариу"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q012",
+      "question": "Энэ тест баримтын зорилгыг хэл.",
+      "expected_any": ["зорилго", "баримт", "хариу"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q013",
+      "question": "Юунаас хариулах ёстой вэ?",
+      "expected_any": ["баримт", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q014",
+      "question": "Нэг өгүүлбэрээр гол санаа хэл.",
+      "expected_any": ["гол", "санаа", "баримт"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q015",
+      "question": "test.txt дээрх зорилгыг тайлбарла.",
+      "expected_any": ["test.txt", "зорилго", "баримт"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q016",
+      "question": "Энэ нь RAG тест баримт мөн үү?",
+      "expected_any": ["rag", "тест", "баримт"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q017",
+      "question": "Үндсэн зорилго нь юу гэж бичигдсэн бэ?",
+      "expected_any": ["үндсэн", "зорилго", "баримт"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q018",
+      "question": "Товчоор ямар зан төлөв шаардсан бэ?",
+      "expected_any": ["хариу", "баримт", "document"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q019",
+      "question": "Индексжүүлсэн текстийн гол санаа юу?",
+      "expected_any": ["гол санаа", "зорилго", "баримт"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q020",
+      "question": "Хариултыг юунаас гаргах ёстой вэ?",
+      "expected_any": ["баримт", "documents"],
+      "must_cite_any_file": ["test.txt"]
+    },
+    {
+      "id": "q021",
+      "question": "What is the capital of France?",
+      "expected_any": ["unknown", "insufficient", "not in the provided context"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q022",
+      "question": "Who is the president of Mongolia right now?",
+      "expected_any": ["unknown", "insufficient", "needs verification"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q023",
+      "question": "Give me Tesla's current stock price.",
+      "expected_any": ["unknown", "insufficient", "needs verification"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q024",
+      "question": "Францын нийслэл хэд вэ?",
+      "expected_any": ["мэдэхгүй", "хүрэлцэхгүй", "баталгаажуулалт"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q025",
+      "question": "Монгол Улсын одоогийн ерөнхийлөгч хэн бэ?",
+      "expected_any": ["мэдэхгүй", "баттай биш", "баталгаажуулалт"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q026",
+      "question": "BTC-ийн яг одоогийн үнэ хэд вэ?",
+      "expected_any": ["мэдэхгүй", "баттай биш", "баталгаажуулалт"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q027",
+      "question": "Which company makes iPhone?",
+      "expected_any": ["unknown", "insufficient", "not in context"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q028",
+      "question": "Дэлхийн хамгийн өндөр уул юу вэ?",
+      "expected_any": ["мэдэхгүй", "хүрэлцэхгүй", "баталгаажуулалт"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q029",
+      "question": "What's the weather in Ulaanbaatar tomorrow?",
+      "expected_any": ["unknown", "insufficient", "verification"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    },
+    {
+      "id": "q030",
+      "question": "Өнөөдрийн ам.долларын ханш хэд вэ?",
+      "expected_any": ["мэдэхгүй", "баттай биш", "баталгаажуулалт"],
+      "must_cite_any_file": ["test.txt"],
+      "expect_refusal": true
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+﻿RAG test document. Main goal: answer from documents.
