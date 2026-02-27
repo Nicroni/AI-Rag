@@ -136,6 +136,9 @@ Flow:
 
 - This RAG layer enforces stricter fact-check style in Mongolian via QA prompt template.
 - If you switch llama.cpp ports/models, edit `run-rag.ps1` environment variables.
+- If indexing fails with `input ... is too large to process`:
+  - restart embedding server with updated `run-bge-embed.ps1` (uses larger `--ubatch-size`)
+  - lower chunk settings in `.env` (`CHUNK_SIZE`, `CHUNK_OVERLAP`) and re-index
 
 ## Phase 1 Baseline Eval
 

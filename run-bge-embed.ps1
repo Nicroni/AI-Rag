@@ -23,5 +23,7 @@ if (-not (Test-Path $model)) {
     -m $model `
     -a text-embedding-3-small `
     --embedding `
+    --batch-size 2048 `
+    --ubatch-size 1024 `
     --host 127.0.0.1 `
     --port 8081

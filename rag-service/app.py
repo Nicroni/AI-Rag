@@ -51,6 +51,8 @@ DEFAULT_SYSTEM_PROMPT_EN = os.getenv(
 STRICT_CONTEXT_MODE = os.getenv("STRICT_CONTEXT_MODE", "true").strip().lower() in {"1", "true", "yes", "on"}
 MIN_SOURCE_SCORE = float(os.getenv("MIN_SOURCE_SCORE", "0.20"))
 TOP_K_DEFAULT = int(os.getenv("TOP_K_DEFAULT", "4"))
+CHUNK_SIZE = int(os.getenv("CHUNK_SIZE", "320"))
+CHUNK_OVERLAP = int(os.getenv("CHUNK_OVERLAP", "64"))
 WINDOWS_LOG_QUERY_TIMEOUT_SEC = int(os.getenv("WINDOWS_LOG_QUERY_TIMEOUT_SEC", "30"))
 WINDOWS_LOG_MAX_EVENTS = int(os.getenv("WINDOWS_LOG_MAX_EVENTS", "200"))
 WINDOWS_LOG_DEFAULT_HOURS_BACK = int(os.getenv("WINDOWS_LOG_DEFAULT_HOURS_BACK", "2"))
@@ -368,6 +370,9 @@ class RAGService:
             api_base=embed_base,
             api_key="none",
         )
+        # Keep chunks small enough for embedding server physical batch limits.
+        Settings.chunk_size = CHUNK_SIZE
+        Settings.chunk_overlap = CHUNK_OVERLAP
 
         self.chroma = chromadb.PersistentClient(path=persist_dir)
 
