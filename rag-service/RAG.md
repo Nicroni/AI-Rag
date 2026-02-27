@@ -36,6 +36,9 @@
      - `GET /health`
      - `POST /index`
      - `POST /query`
+     - `GET /ops`
+     - `POST /windows-logs/query`
+     - `POST /windows-logs/analyze`
 
 Data flow:
 - `/index` -> docs уншина -> chunk/embedding -> Chroma-д хадгална
@@ -116,6 +119,28 @@ powershell -File .\bootstrap1.ps1 -NoStart
 # BGE model байхгүй бол татах оролдлого хийх
 powershell -File .\bootstrap1.ps1 -DownloadBgeIfMissing
 ```
+
+---
+
+## 5.3 Domain system prompt-ыг `.env`-ээс удирдах
+
+Service startup үед `.env` автоматаар уншина.
+
+```powershell
+cd <repo>\rag-service
+copy .env.example .env
+```
+
+`.env` дээрх чухал тохиргоо:
+- `DOMAIN_NAME`
+- `SYSTEM_PROMPT_MN`
+- `SYSTEM_PROMPT_EN`
+- `STRICT_CONTEXT_MODE=true`
+- `MIN_SOURCE_SCORE=0.20`
+
+Эдгээрийг өөрчилснөөр:
+- таны domain мэргэжилтний (жишээ: Windows logs + production RCA engineer) бодлого тогтоно
+- retrieval context сул үед автоматаар `Insufficient data / Мэдээлэл хүрэлцэхгүй` буцаах горим ажиллана
 
 ---
 
@@ -222,6 +247,26 @@ Response fields:
   - `preview`
   - `line_start`
   - `line_end`
+
+---
+
+## 9.1 Windows Event Log Ops Console
+
+Production-like incident workflow UI:
+- `http://127.0.0.1:8090/ops`
+
+Capabilities:
+- Channel/time/event ID/level filters
+- Live Event Log query (`/windows-logs/query`)
+- AI RCA analysis (`/windows-logs/analyze`)
+- Structured analysis sections:
+  - Root Cause
+  - Evidence
+  - Actions
+  - Risk
+- Incident export:
+  - JSON report
+  - Markdown report
 
 ---
 

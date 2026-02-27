@@ -17,9 +17,30 @@ Model names used by this service:
 ## 2) Install Python dependencies
 
 ```powershell
-cd D:\LLM\rag-service
+cd D:\LLM\llama.cpp\rag-service
 pip install -r requirements.txt
 ```
+
+## Domain System Prompt (.env)
+
+This project loads `.env` automatically on startup.
+
+```powershell
+cd D:\LLM\llama.cpp\rag-service
+copy .env.example .env
+```
+
+Edit `.env`:
+- `DOMAIN_NAME`
+- `SYSTEM_PROMPT_MN`
+- `SYSTEM_PROMPT_EN`
+- `STRICT_CONTEXT_MODE`
+- `MIN_SOURCE_SCORE`
+- `WINDOWS_LOG_QUERY_TIMEOUT_SEC`
+- `WINDOWS_LOG_MAX_EVENTS`
+- `WINDOWS_LOG_DEFAULT_HOURS_BACK`
+
+Use this to define your production domain expert behavior (for example, Windows logs RCA specialist).
 
 ## Bootstrap (new machine)
 
@@ -38,7 +59,7 @@ Useful options:
 ## 3) Start RAG API
 
 ```powershell
-cd D:\LLM\rag-service
+cd D:\LLM\llama.cpp\rag-service
 powershell -NoProfile -ExecutionPolicy Bypass -File .\run-rag.ps1
 ```
 
@@ -47,7 +68,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\run-rag.ps1
 This starts all 3 services in separate PowerShell windows.
 
 ```powershell
-cd D:\LLM\rag-service
+cd D:\LLM\llama.cpp\rag-service
 powershell -NoProfile -ExecutionPolicy Bypass -File .\run-all.ps1
 ```
 
@@ -72,6 +93,33 @@ Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8090/query" -ContentType "
 - `GET /health`
 - `POST /index`
 - `POST /query`
+- `GET /chat` (simple frontend chat app)
+- `GET /ops` (Windows Event Log ops console)
+- `GET /windows-logs/channels`
+- `POST /windows-logs/query`
+- `POST /windows-logs/analyze`
+
+`POST /windows-logs/analyze` response includes:
+- `answer` (raw RCA answer)
+- `sections.root_cause`
+- `sections.evidence`
+- `sections.actions`
+- `sections.risk`
+- `events` (top sampled events)
+
+## Ops Console Workflow
+
+Open:
+- `http://127.0.0.1:8090/ops`
+
+Flow:
+1. Select channel/time window/filters
+2. `Load Logs`
+3. Ask RCA question
+4. `Analyze Logs`
+5. Export report:
+   - `Export JSON`
+   - `Export MD`
 
 `POST /query` response includes:
 - `answer` (raw model output)
@@ -94,7 +142,7 @@ Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8090/query" -ContentType "
 Run baseline evaluation with 30 questions and freeze the current quality metrics.
 
 ```powershell
-cd D:\LLM\rag-service
+cd D:\LLM\llama.cpp\rag-service
 python .\eval\run_eval.py --base-url http://127.0.0.1:8090 --dataset .\eval\questions.phase1.json --top-k 4
 ```
 

@@ -1,0 +1,137 @@
+:root {
+  --bg: #0f172a;
+  --panel: #111827;
+  --muted: #94a3b8;
+  --text: #e5e7eb;
+  --accent: #22c55e;
+  --user: #1d4ed8;
+  --bot: #334155;
+  --border: #1f2937;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #172554 0%, var(--bg) 45%);
+  color: var(--text);
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.app {
+  max-width: 980px;
+  margin: 0 auto;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+  padding: 12px;
+}
+
+.topbar {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 94%, white 6%);
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar h1 { margin: 0; font-size: 20px; }
+
+.controls { display: flex; gap: 10px; }
+.controls label {
+  color: var(--muted);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.controls input {
+  background: #0b1220;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-width: 120px;
+}
+
+.chat {
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--panel) 96%, black 4%);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.bubble {
+  border-radius: 12px;
+  padding: 10px 12px;
+  max-width: 88%;
+  line-height: 1.4;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, white 30%);
+}
+
+.bubble.user {
+  background: color-mix(in srgb, var(--user) 25%, #020617 75%);
+  margin-left: auto;
+}
+
+.bubble.bot {
+  background: color-mix(in srgb, var(--bot) 40%, #020617 60%);
+}
+
+.meta {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.sources {
+  margin-top: 8px;
+  border-top: 1px dashed var(--border);
+  padding-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.composer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+}
+
+.composer textarea {
+  resize: vertical;
+  min-height: 54px;
+  max-height: 180px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #0b1220;
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+.composer button {
+  border: 0;
+  border-radius: 12px;
+  padding: 0 18px;
+  font-weight: 700;
+  background: var(--accent);
+  color: #04130b;
+  cursor: pointer;
+}
+
+.composer button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .topbar { flex-direction: column; align-items: stretch; gap: 10px; }
+  .controls { width: 100%; }
+  .controls label { flex: 1; }
+}

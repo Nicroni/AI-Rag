@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Windows Log Ops Console</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <main class="layout">
+    <header class="header">
+      <h1>Windows Log Ops Console</h1>
+      <p>Production-like event log triage and AI-assisted RCA</p>
+    </header>
+
+    <section class="panel filters">
+      <label>Channel
+        <select id="channel"></select>
+      </label>
+      <label>Hours Back
+        <input id="hours" type="number" min="1" max="168" value="2" />
+      </label>
+      <label>Event IDs (comma separated)
+        <input id="eventIds" placeholder="41,6008,7031" />
+      </label>
+      <label>Levels (1-5 comma separated)
+        <input id="levels" placeholder="1,2,3" />
+      </label>
+      <label>Max Events
+        <input id="maxEvents" type="number" min="1" max="200" value="50" />
+      </label>
+      <button id="loadBtn">Load Logs</button>
+    </section>
+
+    <section class="panel logs">
+      <div class="panel-title">Events</div>
+      <div id="stats" class="muted"></div>
+      <div id="events" class="events"></div>
+    </section>
+
+    <section class="panel ai">
+      <div class="panel-title">AI Analysis (RCA)</div>
+      <textarea id="question" rows="3" placeholder="Ask: Why did service X restart repeatedly in the last 2 hours?"></textarea>
+      <div class="row">
+        <button id="analyzeBtn">Analyze Logs</button>
+        <button id="exportJsonBtn" class="secondary">Export JSON</button>
+        <button id="exportMdBtn" class="secondary">Export MD</button>
+      </div>
+      <div id="structured" class="structured"></div>
+      <pre id="answer" class="answer"></pre>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
